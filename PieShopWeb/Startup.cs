@@ -27,14 +27,15 @@ namespace PieShopWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
             services.AddHttpClient();
             services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
 
             services.AddAuthentication();
+            services.AddDbContext<AppDbContext>();
             services.AddDbContext<AppDbContext>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -51,6 +52,8 @@ namespace PieShopWeb
           );
 
             services.AddSession();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddControllersWithViews();
 
         }
 
@@ -65,10 +68,11 @@ namespace PieShopWeb
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
