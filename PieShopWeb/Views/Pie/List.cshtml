@@ -1,0 +1,23 @@
+﻿@model PiesListViewModel
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3 ">
+        <ul class="list-group">
+            <li class="list-group-item">Kek</li>
+            <li class="list-group-item">Pasta</li>
+            <li class="list-group-item">Kurabiye</li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var pie in Model.Pies)
+            {
+                <partial name="_pie" model="pie" />
+            }
+        </div>
+    </div>
+</div>
