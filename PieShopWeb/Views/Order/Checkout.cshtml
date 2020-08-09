@@ -1,6 +1,6 @@
 ﻿@model Entities.Order
 
-<form asp-action="Checkout" method="post">
+<form asp-action="Checkout" asp-controller="Order" method="post">
     <h4> You're just one step away from your delicious pies.</h4>
     <div class="form-group">
         <label asp-for="LastName" class="col-md-2 "></label>

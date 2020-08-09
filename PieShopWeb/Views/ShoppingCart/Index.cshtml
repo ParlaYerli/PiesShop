@@ -1,6 +1,6 @@
 ﻿@model ShoppingCartViewModel
 
-<h2>Your shopping cart</h2>
+<h6>Your shopping cart</h6>
 <h4>Here are the delicious pies in your shopping cart.</h4>
 <table class="table table-bordered table-striped">
     <thead>
@@ -33,7 +33,15 @@
         </tr>
     </tfoot>
 </table>
-
-<div class="text-center">
-    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Chect out now!</a>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Login">Check out now!</a>
+    </div>
+}

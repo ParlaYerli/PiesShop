@@ -20,7 +20,7 @@ namespace PieShopWeb.Controllers
             _shoppingCart = shoppingCart;
         }
 
-        public ViewResult Index()
+        public IActionResult Index()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;

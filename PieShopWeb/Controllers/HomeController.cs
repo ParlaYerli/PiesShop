@@ -70,23 +70,19 @@ namespace PieShopWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            //login functionality
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                //sign in
-                var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
-
-                if (signInResult.Succeeded)
-                {
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+            
+            if (result.Succeeded)
+                { 
                     return RedirectToAction("Index");
                 }
             }
 
-            return View();
+            return View(model);
         }
         public async Task<IActionResult> LogOut()
         {
